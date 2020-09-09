@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class CollectingResults {
     public static Stream<String> noVowels() throws IOException {
-        String contents = new String(Files.readAllBytes(Paths.get("E:\\IDEAworkspace\\JavaMain2\\A.txt")),
+        String contents = new String(Files.readAllBytes(Paths.get("/Users/donglixin/IdeaProjects/JavaMain2/A.txt")),
                 StandardCharsets.UTF_8);
         List<String> wordList = Arrays.asList(contents.split("\\PL+"));
         Stream<String> words = wordList.stream();
@@ -34,7 +34,7 @@ public class CollectingResults {
         try {
             Integer number = (Integer) numbers[0];
             System.out.println(number);
-            System.out.println("The followint statement throws an exception:");
+            System.out.println("The follow int statement throws an exception:");
             Integer[] numbers2 = (Integer[]) numbers;
         } catch (ClassCastException exception) {
             System.out.println(exception);
@@ -47,7 +47,7 @@ public class CollectingResults {
         show("noVowelSet", noVowelSet);
 
         TreeSet<String> noVowelTreeSet = noVowels().collect(Collectors.toCollection(TreeSet::new));
-        show("noVowerTreeSet", noVowelTreeSet);
+        show("noVowelTreeSet", noVowelTreeSet);
 
         String result = noVowels().limit(10).collect(Collectors.joining());
         System.out.println("joining:" + result);

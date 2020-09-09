@@ -25,7 +25,6 @@ public class CollectingIntoMaps {
             return name;
         }
 
-
         @Override
         public String toString() {
             return "Person{" +
@@ -65,6 +64,8 @@ public class CollectingIntoMaps {
                     return union;
                 }));
         System.out.println("countryLanguageSets :"+ countryLanguages);
+        Locale l=Locale.getDefault();
+        System.out.println(l.getDisplayCountry(l));
 
     }
 }
