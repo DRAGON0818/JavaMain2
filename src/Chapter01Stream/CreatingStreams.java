@@ -32,7 +32,7 @@ public class CreatingStreams {
     }
 
     public static void main(String[] args) throws IOException {
-        Path path = Paths.get("E:\\IDEAworkspace\\JavaMain2\\A.txt");
+        Path path = Paths.get("/Users/donglixin/IdeaProjects/JavaMain2/A.txt");
         String contents = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
 
         Stream<String> words = Stream.of(contents.split("\\PL+"));
