@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import static java.util.stream.Collectors.*;
 
 public class ParallelStreams {
@@ -43,7 +42,7 @@ public class ParallelStreams {
         result = wordLists.parallelStream().collect(
                 Collectors.groupingByConcurrent(String::length)
         );
-        System.out.println(result.get(16));
+        System.out.println(result.get(8));
 
         Map<Integer, Long> wordCounts =
                 wordLists.parallelStream().collect(groupingByConcurrent(String::length, counting()));
