@@ -1,6 +1,9 @@
 package Chapter01Stream;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 import java.util.*;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,7 +39,7 @@ public class CollectingIntoMaps {
     }
 
     public static Stream<Person> people(){
-        return Stream.of(new Person(1001, "Peter"), new Person(1002, "Paul"), new Person(1003, "Mary"));
+        return Stream.of(new Person(1001, "Peter"), new Person(1002, "Paul"), new Person(1003, "Mary"),new Person(1004,"Jason"));
     }
 
     public static void main(String[] args) {
@@ -47,6 +50,7 @@ public class CollectingIntoMaps {
         System.out.println("idToPerson: " + idToPerson.getClass().getName()+idToPerson);
 
         idToPerson=people().collect(Collectors.toMap(Person::getId, Function.identity(), (a, b) -> {
+            System.out.println("throw a new IllegalStateExction");
             throw new IllegalStateException();
         }, TreeMap::new));
         System.out.println("idToPerson : " + idToPerson.getClass().getName() + idToPerson);
@@ -66,5 +70,20 @@ public class CollectingIntoMaps {
                 }));
         System.out.println("countryLanguageSets :"+ countryLanguages);
 
+        System.out.println("西班牙的语言:"+ countryLanguages.get("西班牙"));
+
+        Map<String, List<Locale>> countryToLocales = Stream.of(Locale.getAvailableLocales()).collect(Collectors.groupingBy(Locale::getCountry));
+        List<Locale> swillLocales = countryToLocales.get("CH");
+        swillLocales.forEach(System.out::println);
+
+        Map<Boolean, List<Locale>> englishAndOthersLocales = Stream.of(Locale.getAvailableLocales()).collect(Collectors.partitioningBy(l -> l.getLanguage().equals("en")));
+        List<Locale> englishLocales = englishAndOthersLocales.get(true);
+        englishLocales.forEach(System.out::println);
+
+        ConcurrentMap<Boolean, List<Locale>> en = Stream.of(Locale.getAvailableLocales()).collect(Collectors.groupingByConcurrent(l -> l.getLanguage().contains("en")));
+        List<Locale> locales1 = en.get(true);
+        for (Locale locale : locales1) {
+            System.out.print(locale+" ,");
+        }
     }
 }

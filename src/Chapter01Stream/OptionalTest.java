@@ -43,6 +43,7 @@ public class OptionalTest {
         Optional<Double> result2 = Optional.of(-4.0).flatMap(OptionalTest::inverse).flatMap(OptionalTest::squareRoot);
 
         System.out.println(result2);
+
     }
 
     public static Optional<Double> inverse(Double x) {
