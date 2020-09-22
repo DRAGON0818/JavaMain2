@@ -50,7 +50,7 @@ public class CreatingStreams {
         Stream<Double> randoms = Stream.generate(Math::random);
         show("randoms", randoms);
 
-        Stream<BigInteger> integers = Stream.iterate(BigInteger.ONE, n -> n.add(BigInteger.ONE));
+        Stream<BigInteger> integers = Stream.iterate(BigInteger.ZERO, n -> n.add(BigInteger.ONE));
         show("shows", integers);
 
 

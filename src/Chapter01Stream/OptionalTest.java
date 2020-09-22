@@ -8,7 +8,7 @@ import java.util.*;
 
 public class OptionalTest {
     public static void main(String[] args) throws IOException {
-        String contents = new String(Files.readAllBytes(Paths.get("/Users/donglixin/IdeaProjects/JavaMain2/A.txt")), StandardCharsets.UTF_8);
+        String contents = new String(Files.readAllBytes(Paths.get("E:\\IDEAworkspace\\JavaMain2\\A.txt")), StandardCharsets.UTF_8);
         List<String> wordList = Arrays.asList(contents.split("\\PL+"));
 
         Optional<String> optionalValue = wordList.stream().filter(s -> s.contains("fred")).findFirst();
@@ -32,17 +32,18 @@ public class OptionalTest {
         optionalValue = wordList.stream().filter(s -> s.contains("red")).findFirst();
         optionalValue.ifPresent(s -> System.out.println(s + " contains red"));
 
-        List<String> results = new LinkedList<>();
+        List<String> results = new ArrayList<>();
         optionalValue.ifPresent(results::add);
         Optional<Boolean> added = optionalValue.map(results::add);
-        System.out.println("added: "+added);
+        System.out.println(added);
 
-        System.out.println(inverse(4.0).flatMap(OptionalTest::squareRoot).get());
+        System.out.println(inverse(4.0).flatMap(OptionalTest::squareRoot));
         System.out.println(inverse(-1.0).flatMap(OptionalTest::squareRoot));
         System.out.println(inverse(0.0).flatMap(OptionalTest::squareRoot));
         Optional<Double> result2 = Optional.of(-4.0).flatMap(OptionalTest::inverse).flatMap(OptionalTest::squareRoot);
 
-        System.out.println("The result is : "+result2);
+        System.out.println(result2);
+
     }
 
     public static Optional<Double> inverse(Double x) {
