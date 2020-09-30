@@ -1,7 +1,8 @@
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class test {
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
             String[] charsetNames={
                     "UTF-8",
                     "UTF-16",
@@ -24,7 +25,29 @@ public class test {
                 printByteLength(charsetNames[i]);
             }
 
+        try {
+            InputStream in = new FileInputStream("A.txt");
+            in.read();
+
+
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(new FileOutputStream("A.txt")), true);
+            boolean b = out.checkError();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+*/
+
+    public static void main(String[] args) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream("A.txt");
+        byte[] bytes = new byte[20];
+        int read = fileInputStream.read(bytes);
+        String s = new String(bytes, StandardCharsets.UTF_8);
+        System.out.println(s);
+    }
 
         /**
          * String类的不带参数的getBytes()方法会以程序所运行平台的默认编码方式为准来进行转换，
@@ -33,6 +56,7 @@ public class test {
         public static void printByteLength(String charsetName){
             String en="a";    //一个英文字符
             String zh="啊";    //一个中文字符
+           // InputStream in = System.in;
             try {
                 System.out.println(charsetName+"编码英文字符所占字节数:"+en.getBytes(charsetName).length);
                 System.out.println(charsetName+"编码中文字符所占字节数:"+zh.getBytes(charsetName).length);

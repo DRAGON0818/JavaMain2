@@ -13,10 +13,9 @@ public class ParallelStreams {
 
     public static void main(String[] args) throws IOException {
         String contents = new String(Files.readAllBytes(Paths.get(
-                "/Users/donglixin/IdeaProjects/JavaMain2/A.txt")), StandardCharsets.UTF_8);
+                "alice30.txt")), StandardCharsets.UTF_8);
         List<String> wordLists = Arrays.asList(contents.split("\\PL+"));
         int[] shortWords = new int[10];
-        System.out.println(Arrays.toString(shortWords));
         wordLists.parallelStream().forEach(s->
         {
             if(s.length()<10) shortWords[s.length()]++;
@@ -29,20 +28,19 @@ public class ParallelStreams {
         });
         System.out.println(Arrays.toString(shortWords));
 
-        Map<Integer, Long> shortWordCounts = wordLists.parallelStream().filter(
-                s -> s.length() < 10).collect(groupingBy(String::length,
-                counting()));
+        /*Map<Integer, Long> shortWordCounts = */
+        Map<Integer, List<String>> shortWordCounts = wordLists.parallelStream().filter(s -> s.length() < 2).collect(groupingBy(String::length));
         System.out.println(shortWordCounts);
 
         //DownStream order not deterministic   下游顺序不确定性
         Map<Integer, List<String>> result =
                 wordLists.parallelStream().collect(groupingByConcurrent(String::length));
-        System.out.println(result.get(8));
+        System.out.println(result.get(14));
 
         result = wordLists.parallelStream().collect(
                 Collectors.groupingByConcurrent(String::length)
         );
-        System.out.println(result.get(8));
+        System.out.println(result.get(14));
 
         Map<Integer, Long> wordCounts =
                 wordLists.parallelStream().collect(groupingByConcurrent(String::length, counting()));

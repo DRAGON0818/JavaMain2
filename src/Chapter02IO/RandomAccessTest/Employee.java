@@ -1,7 +1,7 @@
 package Chapter02IO.RandomAccessTest;
 
-import java.time.*;
 
+import java.time.*;
 public class Employee
 {
    public static final int NAME_SIZE = 40;
