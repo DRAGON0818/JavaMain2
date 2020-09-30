@@ -1,9 +1,11 @@
 package Chapter02IO;
 
+import java.io.Serializable;
 import java.time.*;
 
 public class Employee
 {
+
    private String name;
    private double salary;
    private LocalDate hireDay;

@@ -12,11 +12,11 @@ public class TextFileTest
 {
    public static void main(String[] args) throws IOException
    {
-      Employee[] staff = new Employee[3];
+      employee[] staff = new employee[3];
 
-      staff[0] = new Employee("Carl Cracker", 75000, 1987, 12, 15);
-      staff[1] = new Employee("Harry Hacker", 50000, 1989, 10, 1);
-      staff[2] = new Employee("Tony Tester", 40000, 1990, 3, 15);
+      staff[0] = new employee("Carl Cracker", 75000, 1987, 12, 15);
+      staff[1] = new employee("Harry Hacker", 50000, 1989, 10, 1);
+      staff[2] = new employee("Tony Tester", 40000, 1990, 3, 15);
 
       // save all employee records to the file employee.dat
       try (PrintWriter out = new PrintWriter("employee.dat", "UTF-8"))
@@ -28,10 +28,10 @@ public class TextFileTest
       try (Scanner in = new Scanner(
             new FileInputStream("employee.dat"), "UTF-8"))
       {
-         Employee[] newStaff = readData(in);
+         employee[] newStaff = readData(in);
 
          // print the newly read employee records
-         for (Employee e : newStaff)
+         for (employee e : newStaff)
             System.out.println(e);
       }
    }
@@ -41,12 +41,12 @@ public class TextFileTest
     * @param employees an array of employees
     * @param out a print writer
     */
-   private static void writeData(Employee[] employees, PrintWriter out) throws IOException
+   private static void writeData(employee[] employees, PrintWriter out) throws IOException
    {
       // write number of employees
       out.println(employees.length);
 
-      for (Employee e : employees)
+      for (employee e : employees)
          writeEmployee(out, e);
    }
 
@@ -55,13 +55,13 @@ public class TextFileTest
     * @param in the scanner
     * @return the array of employees
     */
-   private static Employee[] readData(Scanner in)
+   private static employee[] readData(Scanner in)
    {
       // retrieve the array size
       int n = in.nextInt();
       in.nextLine(); // consume newline
 
-      Employee[] employees = new Employee[n];
+      employee[] employees = new employee[n];
       for (int i = 0; i < n; i++)
       {
          employees[i] = readEmployee(in);
@@ -73,7 +73,7 @@ public class TextFileTest
     * Writes employee data to a print writer
     * @param out the print writer
     */
-   public static void writeEmployee(PrintWriter out, Employee e)
+   public static void writeEmployee(PrintWriter out, employee e)
    {
       out.println(e.getName() + "|" + e.getSalary() + "|" + e.getHireDay());
       out.flush();
@@ -83,7 +83,7 @@ public class TextFileTest
     * Reads employee data from a buffered reader
     * @param in the scanner
     */
-   public static Employee readEmployee(Scanner in)
+   public static employee readEmployee(Scanner in)
    {
       String line = in.nextLine();
       String[] tokens = line.split("\\|");
@@ -93,6 +93,6 @@ public class TextFileTest
       int year = hireDate.getYear();
       int month = hireDate.getMonthValue();
       int day = hireDate.getDayOfMonth();
-      return new Employee(name, salary, year, month, day);
+      return new employee(name, salary, year, month, day);
    }   
 }

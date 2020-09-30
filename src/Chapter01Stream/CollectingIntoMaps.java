@@ -77,11 +77,11 @@ public class CollectingIntoMaps {
         List<Locale> swillLocales = countryToLocales.get("CH");
         swillLocales.forEach(System.out::println);
 
-        Map<Boolean, List<Locale>> englishAndOthersLocales = Stream.of(Locale.getAvailableLocales()).collect(Collectors.partitioningBy(l -> l.getLanguage().equals("en")));
+        Map<Boolean, List<Locale>> englishAndOthersLocales = Stream.of(Locale.getAvailableLocales()).collect(Collectors.partitioningBy(x -> x.getLanguage().equals("en")));
         List<Locale> englishLocales = englishAndOthersLocales.get(true);
         englishLocales.forEach(System.out::println);
 
-        ConcurrentMap<Boolean, List<Locale>> en = Stream.of(Locale.getAvailableLocales()).collect(Collectors.groupingByConcurrent(l -> l.getLanguage().contains("en")));
+        ConcurrentMap<Boolean, List<Locale>> en = Stream.of(Locale.getAvailableLocales()).collect(Collectors.groupingByConcurrent(x -> x.getLanguage().contains("en")));
         List<Locale> locales1 = en.get(true);
         for (Locale locale : locales1) {
             System.out.print(locale+" ,");
