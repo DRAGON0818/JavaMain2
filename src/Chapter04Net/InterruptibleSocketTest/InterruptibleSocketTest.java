@@ -14,8 +14,8 @@ import java.util.Scanner;
 
 /**
  * 套接字并不能直接通过interrupt来解除阻塞。
- * 而是需要通过java.nio的SocketChannel类来处理，当线程发生中断的时候，并不会陷入阻塞，而是会抛出异常
- *
+ * 而是需要通过java.nio的SocketChannel类来处理，当线程发生中断的时候，并不会陷入阻塞，而是会抛出异常.
+ * <h1>如果是阻塞套接字  ，如果发生中断，只能够等待服务器主动关闭连接<h1/>
  */
 
 public class InterruptibleSocketTest {
@@ -32,11 +32,10 @@ public class InterruptibleSocketTest {
 
 class InterrupibleSocketFrame extends JFrame{
     private Scanner in;
-    private JButton interrupibleButton;
-    private JButton blockingButton;
+    final private JButton interrupibleButton;
+    final private JButton blockingButton;
     private JButton cancelButton;
-    private JTextArea messages;
-    private TestServer server;
+    final private JTextArea messages;
     private Thread connectThread;
 
     public InterrupibleSocketFrame(){
@@ -90,7 +89,7 @@ class InterrupibleSocketFrame extends JFrame{
             connectThread.interrupt();
             cancelButton.setEnabled(false);
         });
-        server = new TestServer();
+        TestServer server = new TestServer();
         new Thread(server).start();
         pack();
     }
@@ -130,7 +129,7 @@ class InterrupibleSocketFrame extends JFrame{
             }
         }finally {
             EventQueue.invokeLater(()->{
-                messages.append("Socket closed");
+                messages.append("Socket closed\n");
                 interrupibleButton.setEnabled(true);
                 blockingButton.setEnabled(true);
             });
@@ -162,7 +161,6 @@ class InterrupibleSocketFrame extends JFrame{
 
         private TestServerHandler(Socket incoming){
             this.incoming=incoming;
-            this.counter=4;
         }
 
         @Override
@@ -185,7 +183,6 @@ class InterrupibleSocketFrame extends JFrame{
             }
         }
     }
-
 }
 
 
