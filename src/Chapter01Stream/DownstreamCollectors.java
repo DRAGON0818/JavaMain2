@@ -5,10 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
-
 import static java.util.stream.Collectors.*;
 
-public class DownstreamCollectors {
+public class DownStreamCollectors {
 
     public static class City{
         private String name;
