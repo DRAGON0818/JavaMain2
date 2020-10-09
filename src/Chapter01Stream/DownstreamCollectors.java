@@ -14,6 +14,7 @@ public class DownStreamCollectors {
         private String state;
         private int population;
 
+
         public City(String name, String state, int population) {
             this.name = name;
             this.state = state;
@@ -61,7 +62,7 @@ public class DownStreamCollectors {
         Map<String, Set<String>> countryToLanguages = locales.collect(groupingBy(Locale::getDisplayCountry,
                 mapping(Locale::getDisplayLanguage, toSet())));
         System.out.println("countryToLanguages:" + countryToLanguages);
-
+        System.out.println("");
 
     }
 
