@@ -15,7 +15,6 @@ public class ThreadEchoServer {
                 Runnable threadEchoHandler = new ThreadEchoHandler(accept);
                 Thread thread = new Thread(threadEchoHandler);
                 thread.start();
-
             }
         }
     }
@@ -35,6 +34,9 @@ class ThreadEchoHandler implements Runnable {
         try (InputStream in=comming.getInputStream();
         OutputStream out=comming.getOutputStream()){
             Scanner scanner = new Scanner(in, "UTF-8");
+            /*while (scanner.hasNext()) {
+                System.out.println(scanner.nextLine());
+            }*/
             PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(out), true);
             printWriter.println("Hello,Enter BYE to exit!");
 
