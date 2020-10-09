@@ -62,7 +62,7 @@ public class DownStreamCollectors {
         Map<String, Set<String>> countryToLanguages = locales.collect(groupingBy(Locale::getDisplayCountry,
                 mapping(Locale::getDisplayLanguage, toSet())));
         System.out.println("countryToLanguages:" + countryToLanguages);
-        System.out.println("");
+        System.out.println("\n");
 
     }
 
