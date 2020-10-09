@@ -43,7 +43,10 @@ class ThreadEchoHandler implements Runnable {
             while (!done && scanner.hasNext()) {
                 String s = scanner.nextLine();
                 printWriter.println("Echo :" + s);
-                if("BYE".equals(s.trim())) done=false;
+                if("BYE".equals(s.trim())) {
+                    done=false;
+                    comming.close();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
