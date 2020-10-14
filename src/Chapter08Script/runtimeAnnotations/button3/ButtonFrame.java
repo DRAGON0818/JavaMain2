@@ -1,6 +1,7 @@
 package Chapter08Script.runtimeAnnotations.button3;
 
 import Chapter08Script.runtimeAnnotations.ActionListenerFor;
+import Chapter08Script.runtimeAnnotations.ActionListenerInstaller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,14 +22,15 @@ public class ButtonFrame extends JFrame {
         panel = new JPanel();
         add(panel);
 
-        yellowButton = new JButton("YELLOW");
-        redButton = new JButton("RED");
+        yellowButton = new JButton("Yellow");
+        redButton = new JButton("Red");
         blueButton = new JButton("Blue");
 
         panel.add(yellowButton);
         panel.add(blueButton);
         panel.add(redButton);
 
+        ActionListenerInstaller.processAnnotations(this);
 
     }
 
